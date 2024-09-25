@@ -92,13 +92,14 @@ namespace SimpleCopyOfCNPJ
         {
             var companyList = new List<CompanyModel>();
             var cnpjPattern = @"^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$";
+            var delimiters = new[] { ',', ';' };
 
             using (var reader = new StreamReader(filePath))
             {
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    var values = line.Split(',');
+                    var values = line.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
 
                     if (values.Length == 2)
                     {
